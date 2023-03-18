@@ -67,13 +67,13 @@ export default createStore({
       context.commit("setProjects", responseData.data);
     },
 
- async setfolderId(context, payload) {
+    async setfolderId(context, payload) {
       context.commit("setfolderId", payload.id);
     },
-    async getFolderProjects(context) {
-      if(this.folderId) {
+    async getFolderProjects(context, id) {
+
       const response = await fetch(
-        `https://api.platform.sandbox.easytranslate.com/api/v1/teams/developer-account/folders/${this.folderId}`,
+        `https://api.platform.sandbox.easytranslate.com/api/v1/teams/developer-account/folders/${id}`,
         {
           method: "GET",
           headers: {
@@ -84,7 +84,7 @@ export default createStore({
       );
       const responseData = await response.json();
       console.log(responseData);
-      context.commit("SetFolderProjects", responseData.data);}
+      context.commit("SetFolderProjects", responseData.included);
     },
   },
 

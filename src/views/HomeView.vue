@@ -30,6 +30,7 @@ export default {
     getFolderId(id) {
       this.$store.dispatch('setfolderId',{id:id})
       console.log(this.$store.state.folderId)
+      console.log(this.$store.state.folderProjects)
     },
    
 
@@ -45,8 +46,6 @@ export default {
     await this.$store.dispatch("getSingleProjects");
     await this.$store.dispatch("getFolders");
 
-    console.log(`${localStorage.getItem("token")}`);
-    console.log();
     console.log(this.$store.state.singleProjects);
   },
 };

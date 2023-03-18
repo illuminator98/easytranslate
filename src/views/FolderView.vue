@@ -1,10 +1,10 @@
 <template>
   <div
-    v-for="folder in $store.state.folders"
-    :key="folder.id"
+    v-for="project in $store.state.folderProjects"
+    :key="project.id"
     class="about"
   >
-    <SingleProject :name="folder.attributes.relationships"></SingleProject>
+    <SingleProject :name="project.attributes.name"></SingleProject>
   </div>
 </template>
 
@@ -20,9 +20,8 @@ export default {
     return {};
   },
  async created() {
-    await this.$store.dispatch('getFolderProjects')
-    console.log(this.$store.state.folderProjects)
-
+    await this.$store.dispatch('getFolderProjects', this.$route.params.id)
+    
   },
 };
 </script>
