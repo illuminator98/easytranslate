@@ -1,37 +1,53 @@
 <template>
   <div class="home">
-    <h1 v-for="folder in folders" :key="folder.id">{{ folder.attributes.name }}</h1>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <button @click="getData">get folders</button>
+    <div class="container d-flex flex-wrap">
+      
+      <div v-for="folder ,index in $store.state.folders" @click="getFolderId(folder.id)" :key="folder.id">
+        <!-- <router-link @click="getFolderId(folder.id)" to="/about"> -->
+        <FolderComp @click="$router.push({ name: 'folder', params: { id: folder.id,index } })" :name="folder.attributes.name"></FolderComp>
+      <!-- </router-link> -->
+      </div>
+      <div v-for="project in $store.state.singleProjects" :key="project.id">
+        <SingleProject :name="project.attributes.name"></SingleProject>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  },
-  methods: {
-  
-  },
 
+import FolderComp from "@/components/FolderComp.vue";
+import SingleProject from "@/components/SingleProject.vue";
+export default {
+  name: "HomeView",
+  components: {
+    FolderComp,
+    SingleProject,
+  },
+  
+  methods: {
+    getFolderId(id) {
+      this.$store.dispatch('setfolderId',{id:id})
+      console.log(this.$store.state.folderId)
+    },
+   
+
+  },
   data() {
     return {
-      folders:[],
-    }
-  },
-  async created() {
-  
-      
-      await this.$store.dispatch('getFolders')
-        this.folders=this.$store.state.folders
-       console.log(`${localStorage.getItem("token")}`)
-       console.log(this.folders)
      
-},
-}
+      
+    };
+  },
+  
+  async created() {
+    await this.$store.dispatch("getSingleProjects");
+    await this.$store.dispatch("getFolders");
+
+    console.log(`${localStorage.getItem("token")}`);
+    console.log();
+    console.log(this.$store.state.singleProjects);
+  },
+};
 </script>
