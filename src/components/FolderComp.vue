@@ -2,7 +2,7 @@
   <div class="card border-success mb-3" style="max-width: 18rem">
     <div class="card-header bg-transparent border-success">
       <img
-        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"
+        src="https://img.icons8.com/color/512/mac-folder.png"
         class="img-fluid"
         alt="Responsive image"
       />{{ name }}

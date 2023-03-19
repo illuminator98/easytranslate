@@ -4,9 +4,9 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     isLoggedIn: false,
+    user:'',
     folders: [],
     singleProjects: [],
-    folderId: "",
     folderProjects: [],
   },
   getters: {},
@@ -34,10 +34,13 @@ export default createStore({
       localStorage.setItem("token", responseData.access_token);
       context.commit("setIsLoggedIn", true);
     },
+  
 
-    async getFolders(context) {
+    async getFolders(context,user) {
+           
       const response = await fetch(
-        "https://api.platform.sandbox.easytranslate.com/api/v1/teams/developer-account/folders",
+        
+        `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${user}/folders`,
         {
           method: "GET",
           headers: {
@@ -48,12 +51,13 @@ export default createStore({
       );
       const responseData = await response.json();
       console.log(responseData);
-      context.commit("SetFolders", responseData.data);
+      context.commit("SetFolders",responseData.data);
+    
     },
-
-    async getSingleProjects(context) {
+  
+    async getSingleProjects(context,user) {
       const response = await fetch(
-        "https://api.platform.sandbox.easytranslate.com/api/v1/teams/developer-account/projects?filters[is_workspace]=true",
+        `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${user}/projects?filters[is_workspace]=true`,
         {
           method: "GET",
           headers: {
@@ -67,13 +71,11 @@ export default createStore({
       context.commit("setProjects", responseData.data);
     },
 
-    async setfolderId(context, payload) {
-      context.commit("setfolderId", payload.id);
-    },
-    async getFolderProjects(context, id) {
+  
+    async getFolderProjects(context, payload) {
 
       const response = await fetch(
-        `https://api.platform.sandbox.easytranslate.com/api/v1/teams/developer-account/folders/${id}`,
+        `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${payload.user}/folders/${payload.id}`,
         {
           method: "GET",
           headers: {
@@ -92,9 +94,10 @@ export default createStore({
     setIsLoggedIn(state, value) {
       state.isLoggedIn = value;
     },
-    setfolderId(state, value) {
-      state.folderId = value;
+    setUser(state,value) {
+      state.user=value
     },
+  
     SetFolders(state, value) {
       state.folders = value;
     },

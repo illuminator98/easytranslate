@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <div class="container d-flex flex-wrap">
-      
-      <div v-for="folder ,index in $store.state.folders" @click="getFolderId(folder.id)" :key="folder.id">
-        <!-- <router-link @click="getFolderId(folder.id)" to="/about"> -->
-        <FolderComp @click="$router.push({ name: 'folder', params: { id: folder.id,index } })" :name="folder.attributes.name"></FolderComp>
-      <!-- </router-link> -->
+      <div v-for="folder in $store.state.folders" :key="folder.id">
+        <FolderComp
+          @click="$router.push({ name: 'folder', params: { id: folder.id ,user:$route.params.user} })"
+          :name="folder.attributes.name"
+        ></FolderComp>
       </div>
       <div v-for="project in $store.state.singleProjects" :key="project.id">
         <SingleProject :name="project.attributes.name"></SingleProject>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+
 
 import FolderComp from "@/components/FolderComp.vue";
 import SingleProject from "@/components/SingleProject.vue";
@@ -25,28 +25,23 @@ export default {
     FolderComp,
     SingleProject,
   },
-  
-  methods: {
-    getFolderId(id) {
-      this.$store.dispatch('setfolderId',{id:id})
-      console.log(this.$store.state.folderId)
-      console.log(this.$store.state.folderProjects)
-    },
-   
 
-  },
+  methods: {},
   data() {
     return {
-     
-      
+      user:''
     };
   },
-  
-  async created() {
-    await this.$store.dispatch("getSingleProjects");
-    await this.$store.dispatch("getFolders");
 
-    console.log(this.$store.state.singleProjects);
+  async created() {
+    
+       console.log(this.$route.params.user)
+    await this.$store.dispatch("getSingleProjects",this.$route.params.user);
+    await this.$store.dispatch("getFolders",this.$route.params.user);
+  
+      
   },
+aftercreated () {
+}
 };
 </script>

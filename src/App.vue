@@ -1,8 +1,7 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/folder">folder</router-link>
-    <router-link to="/login">login</router-link>
+   <a> <h1 @click="$router.push({ name: 'home', params: {user:$route.params.user} })"> home</h1></a>
+    <router-link  to="/login">login</router-link>
   </nav>
   <router-view/>
 </template>

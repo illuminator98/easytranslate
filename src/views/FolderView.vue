@@ -19,9 +19,11 @@ export default {
   data() {
     return {};
   },
- async created() {
-    await this.$store.dispatch('getFolderProjects', this.$route.params.id)
+  async created() {
     
+    await this.$store.dispatch("getFolderProjects", {id:this.$route.params.id,user:this.$route.params.user});
+    await this.$store.commit("setUser",this.$route.params.user)
+    console.log(this.$store.state.user)
   },
 };
 </script>
