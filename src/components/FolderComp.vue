@@ -1,11 +1,12 @@
 <template>
-  <div class="card border-success mb-3" style="max-width: 18rem">
+  <div id="folder" class="card  border-success mb-3" style="max-width: 18rem">
     <div class="card-header bg-transparent border-success">
+      {{ name }}
       <img
         src="https://img.icons8.com/color/512/mac-folder.png"
         class="img-fluid"
         alt="Responsive image"
-      />{{ name }}
+      />
     </div>
     <div class="card-body text-success">
       <h5 class="card-title">Success card title</h5>
@@ -26,3 +27,14 @@ export default {
   },
 };
 </script>
+
+<style>
+
+#folder {
+  cursor: pointer;
+  transition: transform 250ms;
+}
+#folder:hover {
+  transform: translateY(-10px);
+}
+</style>

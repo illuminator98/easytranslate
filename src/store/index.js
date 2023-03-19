@@ -4,7 +4,7 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     isLoggedIn: false,
-    user:'',
+    user: "",
     folders: [],
     singleProjects: [],
     folderProjects: [],
@@ -34,12 +34,9 @@ export default createStore({
       localStorage.setItem("token", responseData.access_token);
       context.commit("setIsLoggedIn", true);
     },
-  
 
-    async getFolders(context,user) {
-           
+    async getFolders(context, user) {
       const response = await fetch(
-        
         `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${user}/folders`,
         {
           method: "GET",
@@ -51,11 +48,10 @@ export default createStore({
       );
       const responseData = await response.json();
       console.log(responseData);
-      context.commit("SetFolders",responseData.data);
-    
+      context.commit("SetFolders", responseData.data);
     },
-  
-    async getSingleProjects(context,user) {
+
+    async getSingleProjects(context, user) {
       const response = await fetch(
         `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${user}/projects?filters[is_workspace]=true`,
         {
@@ -71,9 +67,7 @@ export default createStore({
       context.commit("setProjects", responseData.data);
     },
 
-  
     async getFolderProjects(context, payload) {
-
       const response = await fetch(
         `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${payload.user}/folders/${payload.id}`,
         {
@@ -88,18 +82,42 @@ export default createStore({
       console.log(responseData);
       context.commit("SetFolderProjects", responseData.included);
     },
+    async createFolder(context, payload) {
+      const requestData = {
+        type: "project-folder",
+        attributes: {
+          name: payload.name,
+        },
+      };
+      const response = await fetch(
+        `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${payload.user}/folders`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(requestData),
+        }
+      );
+      const responseData = await response.json();
+      console.log(responseData);
+      context.commit("setNewFolder", responseData);
+    },
   },
 
   mutations: {
     setIsLoggedIn(state, value) {
       state.isLoggedIn = value;
     },
-    setUser(state,value) {
-      state.user=value
+    setUser(state, value) {
+      state.user = value;
     },
-  
     SetFolders(state, value) {
       state.folders = value;
+    },
+    setNewFolder(state, value) {
+      state.folders.push(value);
     },
     SetFolderProjects(state, value) {
       state.folderProjects = value;

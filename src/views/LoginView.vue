@@ -40,21 +40,21 @@ export default {
         username: this.username,
         password: this.password,
       });
-     
+
       if (this.$store.state.isLoggedIn) {
         const response = await fetch(
-        "https://api.platform.sandbox.easytranslate.com/api/v1/user",
-        {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-            "content-type": "application/json",
-          },
-        }
-      );
-      const responseData = await response.json();
-      this.user= responseData.included[0].attributes.team_identifier;
-        this.$router.push({ name: "home", params:{user:this.user}});
+          "https://api.platform.sandbox.easytranslate.com/api/v1/user",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "content-type": "application/json",
+            },
+          }
+        );
+        const responseData = await response.json();
+        this.user = responseData.included[0].attributes.team_identifier;
+        this.$router.push({ name: "home", params: { user: this.user } });
       }
     },
   },
