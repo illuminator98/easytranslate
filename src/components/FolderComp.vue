@@ -1,21 +1,19 @@
 <template>
-  <div id="folder" class="card  border-success mb-3" style="max-width: 18rem">
-    <div class="card-header bg-transparent border-success">
-      {{ name }}
-      <img
-        src="https://img.icons8.com/color/512/mac-folder.png"
-        class="img-fluid"
-        alt="Responsive image"
-      />
-    </div>
-    <div class="card-body text-success">
-      <h5 class="card-title">Success card title</h5>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
-    </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
+  <div id="folder" class="card mb-3 me-4 bg-white" style="max-width: 18rem">
+      <div class="folder-icon d-flex justify-content-between">
+        <img
+          src="https://img.icons8.com/color/512/mac-folder.png"
+          alt="Logo"
+          width="40"
+          height="40"
+          class="mt-2 ms-3"
+        />
+        <div class="button"><button class="btn mt-2 me-3">⋮</button></div>
+      </div>
+      <div class="d-flex ms-3 mt-2"><h5>{{ name }}</h5></div>
+      <div class="d-flex ms-3 text-primary"  style="font-size: 12px;"><strong>{{ projectNum }} projects</strong></div>
+      <div class="d-flex ms-3 text-secondary" style="font-size: 12px;"> <strong>created on :{{ date }}</strong></div>
+
   </div>
 </template>
 
@@ -24,17 +22,25 @@ export default {
   name: "FolderComp",
   props: {
     name: String,
+    projectNum:Number,
+    date:String,
   },
 };
 </script>
 
 <style>
-
 #folder {
   cursor: pointer;
-  transition: transform 250ms;
+  transition: transform 350ms;
+  width: 270px;
+  height: 135px;
+  border: none !important;
+  box-shadow: 4px 3px 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 5px 3px 2px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 5px 3px 2px 3px rgba(0, 0, 0, 0.1);
 }
 #folder:hover {
-  transform: translateY(-10px);
+  transform: translateY(-4px);
+  
 }
 </style>

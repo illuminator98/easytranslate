@@ -84,16 +84,19 @@ export default createStore({
     },
     async createFolder(context, payload) {
       const requestData = {
-        type: "project-folder",
-        attributes: {
-          name: payload.name,
-        },
-      };
+        "data": {
+            "type": "project-folder",
+            "attributes": {
+                "name": payload.name
+            }
+        }
+    }
       const response = await fetch(
         `https://api.platform.sandbox.easytranslate.com/api/v1/teams/${payload.user}/folders`,
         {
           method: "POST",
           headers: {
+            "accept": "application/json",
             "content-type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -102,7 +105,7 @@ export default createStore({
       );
       const responseData = await response.json();
       console.log(responseData);
-      context.commit("setNewFolder", responseData);
+      context.commit("setNewFolder", responseData.data);
     },
   },
 

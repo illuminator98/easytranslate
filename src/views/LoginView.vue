@@ -46,8 +46,8 @@ export default {
           "https://api.platform.sandbox.easytranslate.com/api/v1/user",
           {
             method: "GET",
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            headers: {       
+              "Authorization": `Bearer ${localStorage.getItem("token")}`,
               "content-type": "application/json",
             },
           }
