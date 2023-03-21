@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container mt-5 d-flex justify-content-center">
+    <div class="wrapper card">
+      <h3>Login</h3>
     <div class="form-floating mb-3">
       <input
         v-model="username"
@@ -19,8 +21,9 @@
         placeholder="Password"
       />
       <label for="floatingPassword">Password</label>
-      <button @click="login" class="btn btn-primary">Login</button>
+      <button @click="login" class="btn my-4 btn-primary">Login</button>
     </div>
+  </div>
   </div>
 </template>
 
@@ -36,6 +39,10 @@ export default {
 
   methods: {
     async login() {
+      if(!this.username||!this.password) {
+          alert('username and password required')
+          return
+      }
       await this.$store.dispatch("login", {
         username: this.username,
         password: this.password,
@@ -60,3 +67,11 @@ export default {
   },
 };
 </script>
+
+<style>
+
+.wrapper {
+  height: 350px;
+  width: 350px;
+}
+</style>

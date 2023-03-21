@@ -40,6 +40,7 @@ export default {
   -moz-box-shadow: 5px 3px 2px 3px rgba(0, 0, 0, 0.1);
 }
 #folder:hover {
+  border: 1px solid rgb(197, 193, 193) !important;
   transform: translateY(-4px);
   
 }

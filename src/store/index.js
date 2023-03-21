@@ -28,8 +28,11 @@ export default createStore({
             "content-type": "application/json",
           },
           body: JSON.stringify(requestData),
+        });
+        if (!response.ok){
+          alert('invalid credentials')
+          return;
         }
-      );
       const responseData = await response.json();
       localStorage.setItem("token", responseData.access_token);
       context.commit("setIsLoggedIn", true);

@@ -1,5 +1,5 @@
-<template>
-  <div class="container-fluid">
+<template >
+  <div  class="container-fluid">
     <nav class="navbar navbar-expand-lg bg-body-white">
       <div class="container-fluid">
         <a class="navbar-brand text-primary" href="#">MY WORKSPACE</a>
@@ -15,8 +15,10 @@
             <div class="modal-content">
               <div class="modal-body">
                 <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-6 mx-auto">
+                  <div class="">
+                    <div class="">
+                      <div class=" my-3"><h3>Create your folder here</h3></div>
+                      <div class="mb-5">add a new folder to group your projects</div>
                       <input
                         type="text"
                         class="form-control rounded-pill"
@@ -26,12 +28,12 @@
                       />
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6 mx-auto">
+                  <div class="">
+                    <div class="my-3">
                       <button
                         type="button"
                         @click="createFolder"
-                        class="btn btn-primary"
+                        class="btn mt-3 btn-success px-3 rounded-pill"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                       >
@@ -40,13 +42,13 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6 mx-auto">
+                    <div class="col-md-12 mx-auto">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn "
                         data-bs-dismiss="modal"
                       >
-                        Close
+                        Cancel
                       </button>
                     </div>
                   </div>
@@ -88,8 +90,8 @@
       </div>
     </div>
     <!-- //Projects section -->
-      <div class="project-wrapper">
-        <div class="home container-fluid bg-body-tertiary">
+      <div class="project-wrapper ">
+        <div class="home container-fluid ">
           <div class="d-flex">
             <h3 class="me-auto ms-3 my-3">My Projects</h3>
           </div>
@@ -97,9 +99,16 @@
             <div
               v-for="project in $store.state.singleProjects"
               :key="project.id"
-              :name="project.attributes.name"
+              
             >
-              <SingleProject> </SingleProject>
+              <SingleProject 
+              :name="project.attributes.name"
+              :price='project.attributes.price.amount_euro'
+              :orderDate='project.attributes.created_at'
+              :progress='project.attributes.progress.completed_tasks'
+              :status='project.attributes.status'> 
+              
+            </SingleProject>
             </div>
             <div class="project-wrapper">
               <div class="d-flex"></div>

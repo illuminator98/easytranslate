@@ -1,4 +1,5 @@
 <template>
+  <router-link v-if="!this.$store.state.isLoggedIn" to="/login">login</router-link>
   <router-view/>
 </template>
 
