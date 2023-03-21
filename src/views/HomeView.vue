@@ -74,7 +74,7 @@
     <div class="d-flex">
       <h3 class="me-auto ms-3 my-3">My Folders</h3>
     </div>
-    <div class="container-fluid d-flex flex-wrap">
+    <div class="mobile container-fluid d-flex  flex-wrap">
       <div v-for="folder in $store.state.folders" :key="folder.id">
         <FolderComp
           @click="
@@ -161,4 +161,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@media only screen and (max-width: 600px) {
+  .mobile {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+</style>
