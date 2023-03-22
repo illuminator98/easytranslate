@@ -6,18 +6,19 @@
           alt="Logo"
           width="40"
           height="40"
-          class="mt-2 ms-3"
+          class="mt-2 ms-3" 
         />
-        <div class="button"><button class="btn">⋮</button></div>
+        <div class="button"><button class="btn">⋮ </button></div>
       </div>
       <div class="d-flex ms-3 mt-2 mb-1">  <strong>{{ name }}</strong></div>
-      <div class="d-flex ms-3 text-primary"  style="font-size: 12px;"><strong>{{ projectNum }} projects</strong></div>
-      <div class="d-flex ms-3 text-secondary" style="font-size: 12px;"> <strong>created on :{{ date }}</strong></div>
+      <div class="d-flex ms-3 text-primary"  style="font-size: 12px;"> <strong>{{ projectNum }} projects</strong></div>
+      <div class="d-flex ms-3 text-secondary" style="font-size: 12px;"> <strong>created on :  {{dateSet(date)  }}</strong></div>
 
   </div>
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   name: "FolderComp",
   props: {
@@ -25,11 +26,18 @@ export default {
     projectNum:Number,
     date:String,
   },
+methods: {
+dateSet (str) {
+  return moment(str).format('MMMM Do YYYY')
+    }
+
+  },
 };
 </script>
 
 <style>
 #folder {
+  min-width:250px ;
   cursor: pointer;
   transition: transform 250ms;
   border: none !important;

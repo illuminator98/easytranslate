@@ -3,7 +3,7 @@
   <div style="height:auto;" class="crad-header my-4 d-flex justify-content-center align-items-center"> <strong>{{name}}</strong></div>
   <div class="card-body">
     <div class="d-flex ms-3 text-secondary" style="font-size: 11px;"> <strong>DATE OF ORDER:</strong></div>
-    <div class="d-flex mb-2 ms-3 " style="font-size: 11px;"> <strong>{{ orderDate }}</strong></div>
+    <div class="d-flex mb-2 ms-3 " style="font-size: 11px;"> <strong>{{ dateSet(orderDate) }}</strong></div>
     <div class="d-flex ms-3 text-secondary" style="font-size: 11px;"> <strong> PRICE:</strong></div>
     <div class="d-flex ms-3 mb-2 " style="font-size: 11px;"> <strong> {{ price }} €</strong></div>
     <div class="d-flex justify-content-between">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   name: "SingleProject",
   props: {
@@ -38,6 +39,11 @@ export default {
 
 
   },
+methods:{
+    dateSet (str) {
+  return moment(str).format('MMMM Do YYYY, h:mm:ss a')
+    }
+  }
 };
 </script>
 
